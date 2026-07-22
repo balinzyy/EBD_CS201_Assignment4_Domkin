@@ -33,6 +33,14 @@ for i in global_sales:
 
 print(global_sales)
 
+fieldnames = list(global_sales[0].keys())
+
+with open('global_sales_updated.csv', "w", encoding="UTF-8", newline='') as file:
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(global_sales)
+
+
 
 
 
