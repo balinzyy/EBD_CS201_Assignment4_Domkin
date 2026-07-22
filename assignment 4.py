@@ -1,6 +1,7 @@
 import csv
 import json
 import pandas as pd
+import matplotlib.pyplot as plt
 
 with open('global_sales.csv', "r", encoding="UTF-8") as file:
     global_sales = list(csv.DictReader(file))
@@ -71,6 +72,23 @@ with open("top_categories.json", "w", encoding="UTF-8", newline='') as file:
 df = pd.DataFrame(filtered_categories)
 
 print(df.to_string())
+
+plt.bar(df['product_category'], df['net_profit'], color = "red")
+plt.title("Net Profit of Top Categories of Goods", fontsize = 14, fontweight="bold")
+plt.ylabel("Net Profit", fontsize = 12)
+plt.xlabel("Category", fontsize = 12)
+
+plt.xticks(rotation=45, ha="right")
+
+plt.grid(axis="y", linestyle="--", alpha=0.7)
+plt.tight_layout()
+
+
+
+
+plt.show()
+
+
 
 
 
