@@ -1,6 +1,6 @@
 import csv
 import json
-from unicodedata import category
+import pandas as pd
 
 with open('global_sales.csv', "r", encoding="UTF-8") as file:
     global_sales = list(csv.DictReader(file))
@@ -67,6 +67,12 @@ print(filtered_categories)
 
 with open("top_categories.json", "w", encoding="UTF-8", newline='') as file:
     json.dump(filtered_categories, file, indent=4)
+
+df = pd.DataFrame(filtered_categories)
+
+print(df.to_string())
+
+
 
 
 
