@@ -65,6 +65,9 @@ filtered_categories = sorted(filtered_categories, key=lambda x: x['net_profit'],
 
 print(filtered_categories)
 
+with open("top_categories.json", "w", encoding="UTF-8", newline='') as file:
+    json.dump(filtered_categories, file, indent=4)
+
 
 
 
