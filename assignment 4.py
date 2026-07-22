@@ -4,12 +4,12 @@ from unicodedata import category
 
 with open('global_sales.csv', "r", encoding="UTF-8") as file:
     global_sales = list(csv.DictReader(file))
-    print(global_sales)
+
 
 
 with open("regional_tariffs.json", "r", encoding="UTF-8") as file:
     regional_tariffs = json.load(file)
-    print(regional_tariffs)
+
 
 for row in global_sales:
     for column in ['quantity', 'revenue']:
@@ -18,7 +18,7 @@ for row in global_sales:
         else:
             row[column] = float(row[column])
 
-print(global_sales)
+
 
 for region, tarrif in regional_tariffs.items():
     if tarrif == 'N/A':
@@ -26,13 +26,13 @@ for region, tarrif in regional_tariffs.items():
     else:
         regional_tariffs[region] = float(tarrif)
 
-print(regional_tariffs)
+
 
 for i in global_sales:
     net_profit = i["revenue"] - i["revenue"] * (regional_tariffs[i["region"]]/100)
     i["net_profit"] = net_profit
 
-print(global_sales)
+
 
 fieldnames = list(global_sales[0].keys())
 
@@ -49,6 +49,21 @@ for i in global_sales:
     new[category] = new.get(category, 0.0)+profit
 
 print(new)
+
+if len(new) > 0:
+    avg_profit = sum(new.values())/len(new)
+else:
+    avg_profit = 0.0
+
+print(avg_profit)
+
+filtered_categories = [{"product_category" : i, "net_profit" : j} for i, j in new.items() if j > avg_profit]
+
+print(filtered_categories)
+
+filtered_categories = sorted(filtered_categories, key=lambda x: x['net_profit'], reverse=True)
+
+print(filtered_categories)
 
 
 
