@@ -19,7 +19,6 @@ for row in global_sales:
 
 print(global_sales)
 
-
 for region, tarrif in regional_tariffs.items():
     if tarrif == 'N/A':
         regional_tariffs[region] = 0.0
@@ -28,12 +27,15 @@ for region, tarrif in regional_tariffs.items():
 
 print(regional_tariffs)
 
-
-
-
-
 for i in global_sales:
-    i["net_profit"] = i["revenue"] - i["revenue"] * (regional_tariffs[i["region"]]/100)
+    net_profit = i["revenue"] - i["revenue"] * (regional_tariffs[i["region"]]/100)
+    i["net_profit"] = net_profit
+
+print(global_sales)
+
+
+
+
 
 
 
