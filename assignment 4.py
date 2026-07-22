@@ -1,5 +1,6 @@
 import csv
 import json
+from unicodedata import category
 
 with open('global_sales.csv', "r", encoding="UTF-8") as file:
     global_sales = list(csv.DictReader(file))
@@ -40,7 +41,14 @@ with open('global_sales_updated.csv', "w", encoding="UTF-8", newline='') as file
     writer.writeheader()
     writer.writerows(global_sales)
 
+new = {}
 
+for i in global_sales:
+    category = i.get("product_category")
+    profit = i["net_profit"]
+    new[category] = new.get(category, 0.0)+profit
+
+print(new)
 
 
 
